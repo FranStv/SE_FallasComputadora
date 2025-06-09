@@ -4,7 +4,19 @@
 
 :- dynamic si/1, no/1.
 
-%Reglas logicas para problemas de hardware
+%Hechos 
+error(pantalla_azul).
+error(mensaje_error).
+error(reinicio_abrupto).
+error(no_puedo_ingresar).
+error(CRITICAL_PROCESS_DIED).
+%Relaciones
+Codigo_Error(CRITICAL_PROCESS_DIED).
+Proceso_Critico_Fallido(CRITICAL_PROCESS_DIED,pantalla_azul,mensaje_error).
+Reinicio_abrupto_sistema(reinicio_abrupto).
+
+%Reglas logicas para problemas
+problema('Fallo de proceso critico') :- Codigo_Error, Proceso_Critico_Fallido , Reinicio_abrupto_sistema.
 
 problema_hardware('Disco duro dañado o con sectores defectuosos') :-
     verificar(archivos_corruptos),
